@@ -9,7 +9,9 @@ namespace WebStore.Mapper
         public AppMapProfile()
         {
             CreateMap<CategoryEntity, CategoryItemViewModel>();
-                //.ForMember(x => x.Image, opt => opt.MapFrom(x => $"/images/{x.Image}"));
+            //.ForMember(x => x.Image, opt => opt.MapFrom(x => $"/images/{x.Image}"));
+
+            CreateMap<CategoryCreateViewModel, CategoryEntity>();
         }
     }
 }

@@ -1,0 +1,2 @@
+Зробити запит до Server за допомогою біблотеки Retrofit і видать дані на консоль.
+https://spu123.itstep.click/api/categories/list
