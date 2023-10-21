@@ -11,4 +11,6 @@ docker ps -a
 docker stop spu123_container
 docker rm spu123_container
 
+docker rmi spu123_image
+
 
