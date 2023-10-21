@@ -78,7 +78,7 @@ namespace WebStore.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Put(int id)
+        public async Task<IActionResult> Dekete(int id)
         {
             var cat = await _context.Categories
                 .Where(x => x.IsDeleted == false)
