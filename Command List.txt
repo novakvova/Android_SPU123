@@ -1,0 +1,14 @@
+-----Hosting Ubuntu-----
+docker build -t spu123_image .
+docker run -d --restart=always -v /var/www/android/spu123.itstep.click/images:/app/images --name spu123_container -p 8487:80 spu123_image
+
+--------------------------------
+docker ps -l
+docker images --all
+
+docker ps -a
+
+docker stop spu123_container
+docker rm spu123_container
+
+
