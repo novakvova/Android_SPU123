@@ -91,7 +91,7 @@ app.UseCors(x => x
         .AllowAnyOrigin()
         .AllowAnyMethod());
 
-var dir = Path.Combine(Directory.GetCurrentDirectory(), "Images");
+var dir = Path.Combine(Directory.GetCurrentDirectory(), "images");
 if(!Directory.Exists(dir))
 {
     Directory.CreateDirectory(dir);
