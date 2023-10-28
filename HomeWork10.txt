@@ -1,0 +1,2 @@
+Додати на проект refresh token. Протестувати роботу з даним токеном на swagger.
+https://codepedia.info/aspnet-core-jwt-refresh-token-authentication
