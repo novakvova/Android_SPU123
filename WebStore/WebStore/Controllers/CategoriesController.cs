@@ -47,8 +47,9 @@ namespace WebStore.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> Create([FromBody] CategoryCreateViewModel model)
+        public async Task<IActionResult> Create([FromForm] CategoryCreateViewModel model)
         {
+            var requst = this.Request;
             try
             {
                 var cat = _mapper.Map<CategoryEntity>(model);

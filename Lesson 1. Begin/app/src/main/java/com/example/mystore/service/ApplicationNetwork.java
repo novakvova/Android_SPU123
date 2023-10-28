@@ -12,7 +12,8 @@ public class ApplicationNetwork {
     public ApplicationNetwork() {
         retrofit = new Retrofit
                 .Builder()
-                .baseUrl("https://spu123.itstep.click")
+                //.baseUrl("https://spu123.itstep.click")
+                .baseUrl("http://10.0.2.2:5190")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }

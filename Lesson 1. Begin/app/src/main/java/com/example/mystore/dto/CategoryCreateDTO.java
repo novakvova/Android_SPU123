@@ -1,31 +1,35 @@
 package com.example.mystore.dto;
 
-public class CategoryCreateDTO {
-    private String name;
-    private String image;
-    private String description;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.http.Part;
 
-    public String getName() {
+public class CategoryCreateDTO {
+    private RequestBody name;
+    private MultipartBody.Part image;
+    private RequestBody description;
+
+    public RequestBody getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(RequestBody name) {
         this.name = name;
     }
 
-    public String getImage() {
+    public MultipartBody.Part getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(MultipartBody.Part image) {
         this.image = image;
     }
 
-    public String getDescription() {
+    public RequestBody getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(RequestBody description) {
         this.description = description;
     }
 }

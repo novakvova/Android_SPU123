@@ -42,23 +42,6 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tfCategoryImage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:hint="@string/category_image"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tfCategoryName">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txtCategoryImage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tfCategoryDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,7 +50,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tfCategoryImage">
+            tools:layout_editor_absoluteY="232dp"
+            app:layout_constraintTop_toBottomOf="@id/tfCategoryName">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtCategoryDescription"
@@ -79,16 +63,42 @@
                 android:maxLines="10" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <ImageView
+            android:id="@+id/ivSelectImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:minHeight="150dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tfCategoryDescription"
+            tools:srcCompat="@tools:sample/avatars" />
+
         <Button
             android:id="@+id/btnCategoryCreate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="34dp"
+            android:layout_marginTop="24dp"
             android:onClick="onClickCreateCategory"
             android:text="@string/category_add"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivSelectImage" />
+
+        <Button
+            android:id="@+id/btnSelectImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:onClick="openGallery"
+            android:text="Обрати фото"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivSelectImage"
             app:layout_constraintTop_toBottomOf="@+id/tfCategoryDescription" />
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
