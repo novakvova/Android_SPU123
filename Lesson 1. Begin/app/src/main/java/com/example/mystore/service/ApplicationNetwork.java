@@ -1,6 +1,6 @@
-package com.example.mystore.application.service;
+package com.example.mystore.service;
 
-import com.example.mystore.application.network.CategoriesApi;
+import com.example.mystore.network.CategoriesApi;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
