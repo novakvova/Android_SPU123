@@ -2,6 +2,7 @@ package com.example.mystore;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.mystore.application.HomeApplication;
+import com.example.mystore.application.category.CategoryCreateActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,9 +45,11 @@ public class MainActivity extends AppCompatActivity {
         int value = item.getItemId();
         Log.d("Select item", Integer.toString(value));
         switch (item.getItemId()) {
-//            case R.id.m_home:
-//                //newGame();
-//                return true;
+            case 2131231224:
+                Intent intent = new Intent(MainActivity.this, CategoryCreateActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
 //            case R.id.m_create:
 //                //showHelp();
 //                return true;
