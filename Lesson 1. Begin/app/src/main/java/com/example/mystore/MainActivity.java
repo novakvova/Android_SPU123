@@ -3,6 +3,10 @@ package com.example.mystore;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -24,7 +28,30 @@ public class MainActivity extends AppCompatActivity {
                 .load(url)
                 .apply(new RequestOptions().override(600))
                 .into(ivLogo);
-
-
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection.'
+        int value = item.getItemId();
+        Log.d("Select item", Integer.toString(value));
+        switch (item.getItemId()) {
+//            case R.id.m_home:
+//                //newGame();
+//                return true;
+//            case R.id.m_create:
+//                //showHelp();
+//                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }
