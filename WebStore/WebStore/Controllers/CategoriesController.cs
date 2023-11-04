@@ -54,6 +54,18 @@ namespace WebStore.Controllers
             {
                 var cat = _mapper.Map<CategoryEntity>(model);
                 await _context.Categories.AddAsync(cat);
+                string imageName = String.Empty;
+                if (model.Image != null)
+                {
+                    string exp = Path.GetExtension(model.Image.FileName);
+                    imageName = Path.GetRandomFileName() + exp;
+                    string dirSaveImage = Path.Combine(Directory.GetCurrentDirectory(), "images", imageName);
+                    using (var stream = System.IO.File.Create(dirSaveImage))
+                    {
+                        await model.Image.CopyToAsync(stream);
+                    }
+                }
+                cat.Image = imageName;
                 await _context.SaveChangesAsync();
                 return Ok(_mapper.Map<CategoryItemViewModel>(cat));
             } 
