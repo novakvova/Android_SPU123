@@ -16,5 +16,7 @@ namespace WebStore.Data.Entitties.Identity
         public string Image { get; set; }
 
         public virtual ICollection<UserRoleEntity> UserRoles { get; set; }
+
+        public virtual ICollection<CategoryEntity> Categories { get; set; }
     }
 }

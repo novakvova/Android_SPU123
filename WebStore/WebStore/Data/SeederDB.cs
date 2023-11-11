@@ -18,28 +18,6 @@ namespace WebStore.Data
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<RoleEntity>>();
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<UserEntity>>();
                 context.Database.Migrate();
-                if(!context.Categories.Any()) 
-                {
-                    var laptop = new CategoryEntity
-                    {
-                        Name = "Ноутбуки",
-                        Image= "https://image.coolblue.nl/content/0762aa167bbf3a08d1e11912d68be0fb",
-                        Description="Для роботи і навчання",
-                        DateCreated = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc)
-                    };
-
-                    var clothes = new CategoryEntity
-                    {
-                        Name = "Одяг",
-                        Image = "https://shoppingpl.com/uploads/post-covers/Polskie-marki-odziezy-damskiej-.jpg",
-                        Description = "Для дорослих і малих",
-                        DateCreated = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc)
-                    };
-
-                    context.Categories.Add(laptop);
-                    context.Categories.Add(clothes);
-                    context.SaveChanges();
-                }
 
                 if (!context.Roles.Any())
                 {
@@ -94,6 +72,55 @@ namespace WebStore.Data
                     {
                         Console.WriteLine("+++++Помилка створення користувача++++++ {0}", ivan.Email);
                     }
+                }
+
+                if (!context.Categories.Any())
+                {
+                    
+                    var laptop = new CategoryEntity
+                    {
+                        Name = "Ноутбуки",
+                        Image = SaveUrlImage("https://content.rozetka.com.ua/goods/images/big_tile/334493612.jpg"),
+                        Description = "Для роботи і навчання",
+                        DateCreated = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc),
+                        UserId=1
+                    };
+
+                    var clothes = new CategoryEntity
+                    {
+                        Name = "Одяг",
+                        Image = SaveUrlImage("https://content2.rozetka.com.ua/goods/images/big_tile/377007608.jpg"),
+                        Description = "Для дорослих і малих",
+                        DateCreated = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc),
+                        UserId = 1
+                    };
+
+                    context.Categories.Add(laptop);
+                    context.Categories.Add(clothes);
+                    context.SaveChanges();
+                }
+
+            }
+        }
+
+        private static string SaveUrlImage(string url)
+        {
+            string imageName = string.Empty;
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    byte[] imageBytes = client.GetByteArrayAsync(url).Result;
+                    imageName = Path.GetRandomFileName() + ".jpg";
+                    string dirSaveImage = Path.Combine(Directory.GetCurrentDirectory(), "images", imageName);
+                    // Save the downloaded image bytes to a file
+                    File.WriteAllBytes(dirSaveImage, imageBytes);
+                    return imageName;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error downloading or saving image: {ex.Message}");
+                    return null;
                 }
             }
         }

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WebStore.Data.Entitties.Identity;
 
 namespace WebStore.Data.Entitties
 {
@@ -15,5 +16,8 @@ namespace WebStore.Data.Entitties
         [StringLength(4000)]
         public string Description { get; set; }
 
+        [ForeignKey("User")]
+        public int UserId { get; set; }
+        public virtual UserEntity User { get; set; }
     }
 }

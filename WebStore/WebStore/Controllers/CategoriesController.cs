@@ -1,30 +1,40 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebStore.Data;
 using WebStore.Data.Entitties;
+using WebStore.Data.Entitties.Identity;
 using WebStore.Models.Category;
 
 namespace WebStore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CategoriesController : ControllerBase
     {
         private readonly IMapper _mapper;
         private readonly AppEFContext _context;
-        public CategoriesController(IMapper mapper, AppEFContext context)
+        private readonly UserManager<UserEntity> _userManager;
+        public CategoriesController(IMapper mapper, AppEFContext context,
+            UserManager<UserEntity> userManager)
         {
             _context = context;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
         [HttpGet("list")]
         public async Task<IActionResult> Index()
         {
+            string userName = User.Claims.First().Value;
+            var user = await _userManager.FindByEmailAsync(userName);
             var model = await _context.Categories
                .Where(x => x.IsDeleted == false)
+               .Where(x => x.UserId == user.Id)
                .Select(x => _mapper.Map<CategoryItemViewModel>(x))
                .ToListAsync();
 
@@ -34,8 +44,11 @@ namespace WebStore.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
+            string userName = User.Claims.First().Value;
+            var user = await _userManager.FindByEmailAsync(userName);
             var cat = await _context.Categories
                .Where(x => x.IsDeleted == false)
+               .Where(x => x.UserId == user.Id)
                //.Select(x => _mapper.Map<CategoryItemViewModel>(x))
                .SingleOrDefaultAsync(x=>x.Id==id);
 
@@ -52,7 +65,10 @@ namespace WebStore.Controllers
             var requst = this.Request;
             try
             {
+                string userName = User.Claims.First().Value;
+                var user = await _userManager.FindByEmailAsync(userName);
                 var cat = _mapper.Map<CategoryEntity>(model);
+                cat.UserId = user.Id;
                 await _context.Categories.AddAsync(cat);
                 string imageName = String.Empty;
                 if (model.Image != null)
@@ -78,8 +94,11 @@ namespace WebStore.Controllers
         [HttpPut("update")]
         public async Task<IActionResult> Put([FromBody] CategoryUpdateViewModel dto)
         {
+            string userName = User.Claims.First().Value;
+            var user = await _userManager.FindByEmailAsync(userName);
             var cat = await _context.Categories
                 .Where(x => x.IsDeleted == false)
+                .Where(x => x.UserId == user.Id)
                 .SingleOrDefaultAsync(x => x.Id == dto.Id);
             if (cat == null)
                 return NotFound();
@@ -93,8 +112,11 @@ namespace WebStore.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Dekete(int id)
         {
+            string userName = User.Claims.First().Value;
+            var user = await _userManager.FindByEmailAsync(userName);
             var cat = await _context.Categories
                 .Where(x => x.IsDeleted == false)
+                .Where(x => x.UserId == user.Id)
                 .SingleOrDefaultAsync(x => x.Id == id);
             if (cat == null)
                 return NotFound();
